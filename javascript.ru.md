@@ -40,9 +40,12 @@ JavaScript CodeStyle
 
   * Кодировка UTF-8 без [BOM](http://en.wikipedia.org/wiki/Byte-order_mark).
   * Перевод строки: LF. В конце файла перевод строки **обязателен**.
-  * Отступ 4 пробела, знаки табуляции не применяются.
-  * Длина линии не должна превышать 120 символов.
+  * Отступ 2 пробела, знаки табуляции не применяются.
+  * Для отступа аргументов функций используются 4 пробела, допускается выравнивание аргументов по круглым скобкам.
+  * Длина линии, по возможности, не должна превышать 80 символов.
+  * Для отступа длинных линий (больше 80 символов) используются отступы в 4 пробела, либо выравнивание по операнду/скобке вышестоящей строки.
   * Нет лишних пробелов в конце строк (настраиваем свой текстовый редактор, чтобы он удалял лишние пробелы при сохранении).
+  * 'use strict' обязателен.
 
 ##<a name="2"></a>Именование
   * `variableNamesLikeThis`
@@ -56,7 +59,10 @@ JavaScript CodeStyle
   * `private` свойства и методы объектов начинаются с подчеркивания `_`
   * `protected` свойства и методы объектов также начинаются с подчеркивания `_`
   * Избегаем коротких или немногословных названий
-  * В именовании аббревиатур соблюдаем `CamelCase`. Например: `Json`, `Xml`.
+  * В именовании аббревиатур соблюдаем `lowercase`. Например: `json`, `xml`
+  * Использовать множественную форму для массивов. Например: `keys`, `values`
+  * При именовании функций в качестве первого слова отдавать предпочтение глаголу
+  * При именовании функций отдавать предпочтение словарю `is`, `set`, `get`, `to`, `on`, `has`, `fire`.
 
 ##<a name="3"></a>Объявление переменных
   * Все переменные объявляются с `var`.
@@ -71,8 +77,8 @@ var values = [23, 42];
 
 var object = {};
 while (items.length) {
-    var key = keys.pop();
-    object[key] = values.pop();
+  var key = keys.pop();
+  object[key] = values.pop();
 }
 ```
 
@@ -84,8 +90,8 @@ var keys = ['foo', 'bar'],
     key;
 
 while (items.length) {
-    key = keys.pop();
-    object[key] = values.pop();
+  key = keys.pop();
+  object[key] = values.pop();
 }
 ```
 
@@ -104,7 +110,7 @@ this.method({a: 1, b: 2});
 
 ```javascript
 var obj = {
-    prop: 0
+  prop: 0
 };
 ```
   * Выравнивание не используется:
@@ -113,18 +119,18 @@ var obj = {
 
 ```javascript
 var obj = {
-    a: 0,
-    b: 1,
-    lengthyName: 2
+  a: 0,
+  b: 1,
+  lengthyName: 2,
 };
 ```
 **Плохо:**
 
 ```javascript
 var obj = {
-    a          : 0,
-    b          : 1,
-    lengthyName: 2
+  a          : 0,
+  b          : 1,
+  lengthyName: 2,
 };
 ```
   * Имена ключей заключаются в кавычки только по необходимости:
@@ -133,15 +139,15 @@ var obj = {
 
 ```javascript
 var obj = {
-    key: 0,
-    'key-key': 1
+  key: 0,
+  'key-key': 1,
 };
 ```
 **Плохо:**
 ```javascript
 var obj = {
-    'key': 0,
-    'key-key': 1
+  'key': 0,
+  'key-key': 1,
 };
 ```
 
@@ -154,35 +160,140 @@ var fellowship = ['foo', 'bar', 'baz'];
 ```
 
 ###<a name="4-3"></a>Строки
-  * Строки записываются с использованием одинарных кавычек:
+  * Строки записываются преимущественно с использованием одинарных кавычек:
 
 ```javascript
-var lyrics = 'Never gonna give you up, Never gonna let you down';
+var lyrics = 'Knowledge and wisdom is the key';
 ```
 
-  * Если в строке встречается одинарная кавычка, она экранируется:
+  * Если в строке встречается одинарная кавычка, допускается запись с использованием двойных кавычек:
 
 ```javascript
-var test = 'It shouldn\'t fail';
+var lyrics = "Don't worry, be happy. Look at me, I'm happy";
 ```
 
 ##<a name="5"></a>Точка с запятой
 Точка с запятой ставится всегда.
+
+##<a name="5"></a>Запятая
+
+###<a name="5-1"></a>Leading comma
+
+Leading comma не используется
+
+**Хорошо**
+
+```javascript
+superSummer(
+    veryVeryLongLongLongVariableName1,
+    veryVeryLongLongLongVariableName2,
+    veryVeryLongLongLongVariableName3
+);
+
+var story = [
+  once,
+  upon,
+  aTime,
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength',
+};
+
+
+```
+
+**Плохо**
+
+```javascript
+superSummer( veryVeryLongLongLongVariableName1
+           , veryVeryLongLongLongVariableName2
+           , veryVeryLongLongLongVariableName3
+           );
+
+var story = [
+    once
+  , upon
+  , aTime
+];
+
+var hero = {
+    firstName: 'Bob'
+  , lastName: 'Parr'
+  , heroName: 'Mr. Incredible'
+  , superPower: 'strength'
+};
+```
+
+###<a name="5-2"></a>Дополнительная запятая
+
+Дополнительная запятая на последней строке многострочных объявлений массивов и объектов обязательна.
+
+**Хорошо**
+```javascript
+var story = [
+  once,
+  upon,
+  aTime,
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength',
+};
+```
+
+**Плохо**
+```javascript
+var story = [
+  once,
+  upon,
+  aTime
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength'
+};
+```
+
+Для однострочных объявлений запятая после последнего элемента не нужна.
+
+**Хорошо**
+```javascript
+var story = [ once, upon, aTime ];
+
+var hero = { firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible' };
+```
+
+**Плохо**
+```javascript
+var story = [ once, upon, aTime, ];
+
+var hero = { firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible', };
+```
 
 ##<a name="6"></a>Ключевые слова
   * Ключевые слова отделяются пробелом:
 
 ```javascript
 if (test) {
-    // ...
+  // ...
 }
 
 function foo() {
-    // ...
+  // ...
 }
 
 var bar = function () {
-    // ...
+  // ...
 };
 ```
 
@@ -197,11 +308,11 @@ return;
 
 ```javascript
 if (test) {
-    // ...
+  // ...
 }
 
 function foo() {
-    // ...
+  // ...
 }
 ```
   * Фигурные скобки ставятся всегда:
@@ -210,14 +321,14 @@ function foo() {
 
 ```javascript
 if (test) {
-    return;
+  return;
 }
 ```
 **Плохо:**
 
 ```javascript
 if (test)
-    return;
+  return;
 
 if (test) return;
 
@@ -230,9 +341,11 @@ if (test) { return; }
 
 ```javascript
 if (test) {
-    // ...
+  // ...
+} else if {
+  // ...
 } else {
-    // ...
+  // ...
 }
 ```
   * Присваивание в условном выражении не используется:
@@ -242,7 +355,7 @@ if (test) {
 ```javascript
 var foo = bar();
 if (foo > 0) {
-    // ...
+  // ...
 }
 ```
 
@@ -250,7 +363,7 @@ if (foo > 0) {
 ```javascript
 var foo;
 if ((foo = bar()) > 0) {
-    // ...
+  // ...
 }
 ```
   * Выражения используются только там, где требуется значение:
@@ -259,9 +372,9 @@ if ((foo = bar()) > 0) {
 
 ```javascript
 if (condition) {
-    actionIfTrue();
+  actionIfTrue();
 } else {
-    actionIfFalse();
+  actionIfFalse();
 }
 ```
 
@@ -277,7 +390,7 @@ if (longCondition ||
     anotherLongCondition &&
     yetAnotherLongCondition
 ) {
-    // ...
+  // ...
 }
 ```
 
@@ -286,14 +399,14 @@ if (longCondition ||
 **Хорошо:**
 ```javascript
 if (getType() === 'driving') {
-
+  // ...
 }
 ```
 
 **Плохо:**
 ```javascript
 if ('driving' === getType()) {
-
+  // ...
 }
 ```
 
@@ -301,17 +414,17 @@ if ('driving' === getType()) {
 
 ```javascript
 switch (value) {
-    case 1:
-        // ...
-        break;
+  case 1:
+    // ...
+    break;
 
-    case 2:
-        // ...
-        break;
+  case 2:
+    // ...
+    break;
 
-    default:
-        // ...
-        // no break keyword on the last case
+  default:
+    // ...
+    // no break keyword on the last case
 }
 ```
 
@@ -321,7 +434,7 @@ switch (value) {
 
 ```javascript
 [1, 2, 3].forEach(function (value) {
-    console.log(value);
+  console.log(value);
 });
 ```
 
@@ -329,10 +442,35 @@ switch (value) {
 критична скорость используется обычный `for`.
 
 ###<a name="9-2"></a>for (var i in obj)
-По возможности вместо `for-in` используется [Object.keys](https://developer.mozilla.org/ru/docs/JavaScript/Reference/Global_Objects/Object/keys):
+Допускается только для итераций по ключам в [object/map/hash](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml?showone=for-in_loop#for-in_loop)
+```javascript
+function printArray(arr) {
+  for (var key in arr) {
+    print(arr[key]);
+  }
+}
+
+printArray([0,1,2,3]);  // This works.
+
+var a = new Array(10);
+printArray(a);  // This is wrong.
+
+a = document.getElementsByTagName('*');
+printArray(a);  // This is wrong.
+
+a = [0,1,2,3];
+a.buhu = 'wine';
+printArray(a);  // This is wrong again.
+
+a = new Array;
+a[3] = 3;
+printArray(a);  // This is wrong again.
+```
+
+Иначе, вместо `for-in` используется [Object.keys](https://developer.mozilla.org/ru/docs/JavaScript/Reference/Global_Objects/Object/keys):
 ```javascript
 Object.keys(obj).forEach(function (key) {
-    console.log(key);
+  console.log(key);
 });
 ```
 
@@ -369,23 +507,20 @@ var foo = !bar;
 
 ##<a name="12"></a>undefined
 
-Проверяем значение через строгое сравнение.
+Проверяем значение через typeof.
 
 **Хорошо:**
 ```javascript
-x === undefined;
+typeof x === 'undefined';
 ```
 
 **Плохо:**
 ```javascript
 // в современных браузерах уже определен immutable undefined.
 var undefined;
+
+// проверка через строгое соответствие
 x === undefined;
-
-// больше писать
-typeof x === 'undefined'
-
-x === void 0
 ```
 
 ##<a name="13"></a>Круглые скобки
@@ -426,12 +561,61 @@ baz + ''
 ```
 
 ##<a name="16"></a>Переносы строк
-  * Максимальная длина строки `120` символов, если строка выходит длиннее, то по возможности делаются переносы строки, с соответствующими отступами после переноса.
-  * Операторы размещаются на предыдущей строке:
+  * Максимальная длина строки `80` символов, если строка выходит длиннее, то по возможности делаются переносы строки, с соответствующими отступами после переноса.
+  * Операторы размещаются на предыдущей строке.
+
+**Хорошо**
 
 ```javascript
-var debt = this.calculateBaseDebt() + this.calculateSharedDebt() + this.calculateDebtPayments() +
-    this.calculateDebtFine();
+someWonderfulHtml = '<wonderfulblock>' +
+                    getEvenMoreHtml(someReallyInterestingValues, moreValues,
+                                    evenMoreParams, 'a duck', true, 72,
+                                    slightlyMoreMonkeys(3.14)
+                    ) + '</wonderfulblock>';
+
+thisIsAVeryLongVariableName =
+    hereIsAnEvenLongerOtherFunctionNameThatWillNotFitOnPrevLine();
+
+thisIsAVeryLongVariableName = siblingOne + siblingTwo + siblingThree +
+    siblingFour + siblingFive + siblingSix + siblingSeven +
+    moreSiblingExpressions + allAtTheSameIndentationLevel;
+
+thisIsAVeryLongVariableName = operandOne + operandTwo + operandThree +
+    operandFour + operandFive * (
+        aNestedChildExpression + shouldBeIndentedMore
+    );
+
+someValue = this.foo(
+    shortArg,
+    'Some really long string arg - this is a pretty common case, actually.',
+    shorty2,
+    this.bar()
+);
+
+var bShortCondition =
+    searchableCollection(allYourStuff).contains(theStuffYouWant);
+if (bShortCondition &&
+    !ambientNotification.isActive() &&
+    (client.isAmbientSupported() || client.alwaysTryAmbientAnyways())
+) {
+  ambientNotification.activate();
+}
+```
+
+**Плохо**
+
+```javascript
+thisIsAVeryLongVariableName = hereIsAnEvenLongerOtherFunctionNameThatWillNotFitOnPrevLine();
+
+thisIsAVeryLongVariableName = siblingOne + siblingTwo + siblingThree +
+  siblingFour + siblingFive + siblingSix + siblingSeven +
+  moreSiblingExpressions + allAtTheSameIndentationLevel;
+
+if (searchableCollection(allYourStuff).contains(theStuffYouWant) &&
+    !ambientNotification.isActive() && (client.isAmbientSupported() ||
+                                        client.alwaysTryAmbientAnyways())) {
+  ambientNotification.activate();
+}
 ```
 
   * Закрывающие скобки не прижимаются к переносимому коду:
@@ -465,19 +649,19 @@ anotherStatement;
 
 ```js
 someObject
-    .operation()
-    .operationWithCallback(function (obj) {
-        obj.processed = true;
-    })
-   .end();
+  .operation()
+  .operationWithCallback(function (obj) {
+    obj.processed = true;
+  })
+  .end();
 ```
 
 **Плохо**:
 
 ```js
 someObject.
-   start().
-   end();
+  start().
+  end();
 
 someObject
 .start()
@@ -497,15 +681,22 @@ var foo = 'A rather long string of English text, an error message ' +
     'those Schwarzenegger shades)! Where was I? Oh yes, ' +
     'you\'ve got an error and all the extraneous whitespace is ' +
     'just gravy.  Have a nice day.';
+
+var foo = 'A rather long string of English text, an error message ' +
+          'actually that just keeps going and going -- an error ' +
+          'message to make the Energizer bunny blush (right through ' +
+          'those Schwarzenegger shades)! Where was I? Oh yes, ' +
+          'you\'ve got an error and all the extraneous whitespace is ' +
+          'just gravy.  Have a nice day.';
 ```
 **Плохо:**
 ```javascript
 var foo = 'A rather long string of English text, an error message \
-          actually that just keeps going and going -- an error \
-          message to make the Energizer bunny blush (right through \
-          those Schwarzenegger shades)! Where was I? Oh yes, \
-          you\'ve got an error and all the extraneous whitespace is \
-          just gravy.  Have a nice day.';
+  actually that just keeps going and going -- an error \
+  message to make the Energizer bunny blush (right through \
+  those Schwarzenegger shades)! Where was I? Oh yes, \
+  you\'ve got an error and all the extraneous whitespace is \
+  just gravy.  Have a nice day.';
 ```
 
 ##<a name="19"></a>Пустые линии
@@ -527,7 +718,7 @@ andNowWith(z);
 
 ```javascript
 doAsync(function () {
-    this.fn();
+  this.fn();
 }.bind(this));
 ```
 
@@ -537,7 +728,7 @@ doAsync(function () {
 
 ```javascript
 [1, 2, 3].forEach(function (n) {
-    this.fn(n);
+  this.fn(n);
 }, this);
 ```
 
@@ -545,7 +736,7 @@ doAsync(function () {
 
 ```javascript
 [1, 2, 3].forEach(function (n) {
-    this.fn(n);
+  this.fn(n);
 }.bind(this));
 ```
 
@@ -554,7 +745,7 @@ doAsync(function () {
 ```javascript
 var _this = this;
 doAsync(function () {
-    _this.fn();
+  _this.fn();
 });
 ```
 
@@ -567,12 +758,12 @@ doAsync(function () {
 
 ```javascript
 var FooClass = inherit({
-    __constructor: function () {},
+  __constructor: function () {},
 
-    // деструктор рядом с конструктором
-    destruct: function () {},
+  // деструктор рядом с конструктором
+  destruct: function () {},
 
-    someMethod: function () {}
+  someMethod: function () {},
 });
 ```
 
