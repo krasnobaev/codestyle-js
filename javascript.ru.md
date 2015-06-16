@@ -342,12 +342,12 @@ if (test) { return; }
   * `else` пишется на той же строке, что и закрывающая фигурная скобка
 
 ```javascript
-if (test) {
-  // ...
-} else if {
-  // ...
+if (time < 10) {
+  greeting = 'Good morning';
+} else if (time < 20) {
+  greeting = 'Good day';
 } else {
-  // ...
+  greeting = 'Good evening';
 }
 ```
   * Присваивание в условном выражении не используется:
