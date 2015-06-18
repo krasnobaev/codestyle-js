@@ -270,16 +270,16 @@ var hero = {
 
 **Хорошо**
 ```javascript
-var story = [ once, upon, aTime ];
+var story = [once, upon, aTime];
 
-var hero = { firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible' };
+var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible'};
 ```
 
 **Плохо**
 ```javascript
-var story = [ once, upon, aTime, ];
+var story = [once, upon, aTime,];
 
-var hero = { firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible', };
+var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible',};
 ```
 
 ##<a name="6"></a>Ключевые слова
@@ -776,19 +776,23 @@ var FooClass = inherit({
 **Хорошо:**
 
 ```javascript
-var http = require('http');
-var fs = require('fs');
+jQuery.sap.registerModulePath("myPackages", "./package/");
+jQuery.sap.declare("tooSmartController");
+jQuery.sap.declare("anotherSmartController");
+jQuery.sap.require("DetailReport.controls.ExtendedChartContainer");
 
 // code here
 ```
 **Плохо:**
 
 ```javascript
-var http = require('http');
+jQuery.sap.require("DetailReport.controls.ExtendedChartContainer");
+jQuery.sap.registerModulePath("myPackages", "./package/");
 
 // code here
 
-var fs = require('fs');
+jQuery.sap.declare("tooSmartController");
+jQuery.sap.declare("anotherSmartController");
 
 // code here
 ```
