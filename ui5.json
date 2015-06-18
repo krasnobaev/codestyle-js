@@ -1,0 +1,9 @@
+{
+    "preset": "yandex",
+
+    "maximumLineLength": {
+        "value": 80,
+        "allowUrlComments": true
+    },
+    "validateIndentation": 2
+}
