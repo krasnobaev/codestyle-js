@@ -30,7 +30,6 @@
     "requireSpaceBeforeBlockStatements": 1,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "requireDollarBeforejQueryAssignment": true,
-    "requirePaddingNewLineAfterVariableDeclaration": true,
     "requireSpaceBeforeObjectValues": true,
     "validateQuoteMarks": {
         "mark": "'",
