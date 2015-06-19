@@ -5,5 +5,35 @@
         "value": 80,
         "allowUrlComments": true
     },
-    "validateIndentation": 2
+    "validateIndentation": 2,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowOperatorBeforeLineBreak": ["."],
+    "requireOperatorBeforeLineBreak": [
+        "?",
+        "=",
+        "+",
+        "-",
+        "/",
+        "*",
+        "==",
+        "===",
+        "!=",
+        "!==",
+        ">",
+        ">=",
+        "<",
+        "<="
+    ],
+    "requireTrailingComma": {
+        "ignoreSingleLine": true
+    },
+    "requireSpaceBeforeBlockStatements": 1,
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "requireDollarBeforejQueryAssignment": true,
+    "requirePaddingNewLineAfterVariableDeclaration": true,
+    "requireSpaceBeforeObjectValues": true,
+    "validateQuoteMarks": {
+        "mark": "'",
+        "escape": true
+    }
 }

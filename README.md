@@ -18,7 +18,7 @@ These are the fundamental principals we follow when we design and develop softwa
 * In simple expressions it's harder to make mistakes.
 
 ## This style guide
-* [JavaScript](javascript.md)
+* [JavaScript](javascript.ru.md)
 * [Settings for Sublime Text](Preferences.sublime-settings)
 * [Settings for JSCS](ui5.json)
 
