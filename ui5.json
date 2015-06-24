@@ -34,5 +34,6 @@
     "validateQuoteMarks": {
         "mark": "'",
         "escape": true
-    }
+    },
+    "requireBlocksOnNewline": true
 }
