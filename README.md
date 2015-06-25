@@ -21,6 +21,7 @@ These are the fundamental principals we follow when we design and develop softwa
 * [JavaScript](javascript.ru.md)
 * [Settings for Sublime Text](Preferences.sublime-settings)
 * [Settings for JSCS](ui5.json)
+* [Git configuration](.gitconfig)
 
 ## Other style guides
 * [Yandex original](https://github.com/yandex/codestyle)
