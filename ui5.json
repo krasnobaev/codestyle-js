@@ -1,10 +1,14 @@
 {
     "preset": "yandex",
-    "version": "0.1",
 
     "maximumLineLength": {
         "value": 80,
-        "allowUrlComments": true
+        "allExcept": [
+            "regex",
+            "comments",
+            "urlComments",
+            "functionSignature"
+        ]
     },
     "validateIndentation": 2,
     "disallowNewlineBeforeBlockStatements": true,
