@@ -1,85 +1,92 @@
 JavaScript CodeStyle
 ====================
-  - [General](#general)
-  - [Naming](#naming)
-  - [Variable declaration](#variable-declaration)
-  - [Literals](#literals)
-    - [Objects](#objects)
-    - [Arrays](#arrays)
-    - [Strings](#strings)
-  - [Semicolons](#semicolons)
-  - [Keywords](#keywords)
-  - [Block Statements](#block-statements)
-  - [Conditional Statements](#conditional-statements)
-    - [if](#if)
-    - [switch](#switch)
-  - [Loops](#loops)
-    - [for](#for)
-    - [for (var i in obj)](#for-var-i-in-obj)
-  - [Operators](#operators)
-    - ['with' operator](#with-operator)
-    - [Comparison Operators](#comparison-operators)
-    - [Ternary Operator](#ternary-operator)
-    - [Unary Operators](#unary-operators)
-  - [eval](#eval)
-  - [undefined](#undefined)
-  - [Parentheses](#parentheses)
-  - [Exceptions](#exceptions)
-  - [Type Casting](#type-casting)
-  - [Multi-Line Statements](#multi-line-statements)
-  - [Method Chaining](#method-chaining)
-  - [String concatenation](#string-concatenation)
-  - [Empty Lines](#empty-lines)
-  - [Function Context](#function-context)
-  - [Comments](#comments)
-  - [Classes](#classes)
-  - [node.js](#nodejs)
-    - [Importing Modules](#importing-modules)
+  - [Общие положения](#1)
+  - [Именование](#2)
+  - [Объявление переменных](#3)
+  - [Объявление констант](#3-1)
+  - [Литералы](#4)
+    - [Объекты](#4-1)
+    - [Массивы](#4-2)
+    - [Строки](#4-3)
+  - [Точка с запятой](#5)
+  - [Запятая](#5a)
+    - [Leading comma](#5a-1)
+    - [Дополнительная запятая](#5a-2)
+  - [Ключевые слова](#6)
+  - [Блочные инструкции](#7)
+  - [Условные инструкции](#8)
+    - [if](#8-1)
+    - [switch](#8-2)
+  - [Циклы](#9)
+    - [for](#9-1)
+    - [for (var i in obj)](#9-2)
+  - [Операторы](#10)
+    - [with](#10-1)
+    - [Оператор равенства](#10-2)
+    - [Тернарный оператор](#10-3)
+    - [Унарный оператор](#10-4)
+  - [eval](#11)
+  - [undefined](#12)
+  - [Круглые скобки](#13)
+  - [Исключения](#14)
+  - [Приведение типов](#15)
+  - [Переносы строк](#16)
+  - [Цепочки вызовов](#17)
+  - [Конкатенация строк](#18)
+  - [Пустые линии](#19)
+  - [Контекст функции](#20)
+  - [Комментарии](#21)
+  - [Классы](#22)
+  - [Импортирование модулей](#23)
 
-##General
+##<a name="1"></a>Общие положения
 
-  * Files should be encoded in UTF-8 without [BOM](http://en.wikipedia.org/wiki/Byte-order_mark).
-  * The recommended line-break character is LF - `\n`.
-  * Files should end with a LF character.
-  * One level of indentation is achieved with 4 space characters.
-  * Lines should be no longer than 120 characters.
-  * Trailing whitespace at the end of lines should be removed.
+  * Кодировка UTF-8 без [BOM](http://en.wikipedia.org/wiki/Byte-order_mark).
+  * Перевод строки: LF. В конце файла перевод строки **обязателен**.
+  * Отступ 2 пробела, знаки табуляции не применяются.
+  * Для отступа аргументов функций используются 4 пробела, допускается выравнивание аргументов по круглым скобкам.
+  * Длина линии, по возможности, не должна превышать 80 символов.
+  * Для отступа длинных линий (больше 80 символов) используются отступы в 4 пробела, либо выравнивание по операнду/скобке вышестоящей строки.
+  * Нет лишних пробелов в конце строк (настраиваем свой текстовый редактор, чтобы он удалял лишние пробелы при сохранении).
+  * 'use strict' обязателен.
+  * Максимальное разделение блоков - 1 пустая строка. Если требуется выделить блок особым образом, необходим многострочный комментарий.
 
-##Naming
+##<a name="2"></a>Именование
   * `variableNamesLikeThis`
   * `functionNamesLikeThis`
   * `functionArgumentsLikeThis`
   * `ClassNamesLikeThis`
   * `methodNamesLikeThis`
   * `CONSTANTS_LIKE_THIS`
-  * `namespacesLikeThis`
-  * `events-like-this`
-  * `private` or `protected` properties and methods should be prefixed with a single `_` character
-  * Shortened and abbreviated names should be avoided.
-  * Common abbreviations, such as `JSON` and `XML` are written in `CamelCase`. For example: `Json`, `Xml`.
+  * `namespaceLikeThis`
+  * `event-like-this`
+  * `private` свойства и методы объектов начинаются с подчеркивания `_`
+  * `protected` свойства и методы объектов также начинаются с подчеркивания `_`
+  * Избегаем коротких или немногословных названий
+  * В именовании аббревиатур соблюдаем `lowercase`. Например: `json`, `xml`
+  * Использовать множественную форму для массивов. Например: `keys`, `values`
+  * При именовании функций в качестве первого слова отдавать предпочтение глаголу
+  * При именовании функций отдавать предпочтение словарю `is`, `set`, `get`, `to`, `on`, `has`, `fire`.
 
-##Variable declaration
-  * Each variable should be declared:
-    * using a `var` statement;
-    * only once in the current scope;
-    * on a new line;
-    * as close as possible to the place where it's first used.
+##<a name="3"></a>Объявление переменных
+  * Все переменные объявляются с `var`.
+  * Каждая переменная в пределах одной области видимости объявляется только один раз.
+  * Каждая переменная объявляется на новой строке. Это позволяет легко менять строки местами и подписывать к ним комментарии.
+  * Переменные объявляются как можно ближе к месту использования.
 
-  * Each `var` statement should have only one variable declared in it.
-
-**Good:**
+**Хорошо:**
 ```javascript
 var keys = ['foo', 'bar'];
 var values = [23, 42];
 
 var object = {};
 while (items.length) {
-    var key = keys.pop();
-    object[key] = values.pop();
+  var key = keys.pop();
+  object[key] = values.pop();
 }
 ```
 
-**Bad:**
+**Плохо:**
 ```javascript
 var keys = ['foo', 'bar'],
     values = [23, 42],
@@ -87,264 +94,414 @@ var keys = ['foo', 'bar'],
     key;
 
 while (items.length) {
-    key = keys.pop();
-    object[key] = values.pop();
+  key = keys.pop();
+  object[key] = values.pop();
 }
 ```
 
-##Literals
+##<a name="3-1"></a>Объявление констант
 
-###Objects
-  * There should be no whitespace after the opening and before the closing curly braces:
+Константы именуются в верхнем регистре, с разделением через `_`
+
+**Хорошо:**
+```javascript
+var MY_PRECIOUS = ' { ';
+```
+
+**Плохо:**
+```javascript
+var MYPRECIOUS = ' { ';
+var MyPrecious = ' } ';
+```
+
+##<a name="4"></a>Литералы
+
+###<a name="4-1"></a>Объекты
+
+  * После открывающей фигурной скобки и перед закрывающей пробел не ставится:
 
 ```javascript
 var obj = {a: 1, b: 2, c: 3};
 
 this.method({a: 1, b: 2});
 ```
-  * There should be no whitespace characters before the colon:
+  * Пробел перед двоеточием не ставится:
 
 ```javascript
 var obj = {
-    prop: 0
+  prop: 0
 };
 ```
-  * Only property names should be aligned within object literals:
+  * Выравнивание не используется:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 var obj = {
-    a: 0,
-    b: 1,
-    lengthyName: 2
+  a: 0,
+  b: 1,
+  lengthyName: 2,
 };
 ```
-**Bad:**
+**Плохо:**
 
 ```javascript
 var obj = {
-    a          : 0,
-    b          : 1,
-    lengthyName: 2
+  a          : 0,
+  b          : 1,
+  lengthyName: 2,
 };
 ```
-  * Quotes around property names should be typed only if needed:
+  * Имена ключей заключаются в кавычки только по необходимости:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 var obj = {
-    key: 0,
-    'key-key': 1
+  key: 0,
+  'key-key': 1,
 };
 ```
-
-**Bad:**
-
+**Плохо:**
 ```javascript
 var obj = {
-    'key': 0,
-    'key-key': 1
+  'key': 0,
+  'key-key': 1,
 };
 ```
 
-###Arrays
-  * When enumerating elements in an array literal, spaces should be typed after the comma only:
+###<a name="4-2"></a>Массивы
+
+При объявлении массива, пробел ставится лишь после запятой:
 
 ```javascript
 var fellowship = ['foo', 'bar', 'baz'];
 ```
 
-###Strings
-  * String literals should use single quotes:
+###<a name="4-3"></a>Строки
+  * Строки записываются преимущественно с использованием одинарных кавычек:
 
 ```javascript
-var lyrics = 'Never gonna give you up. Never gonna let you down. Never gonna turn around and desert you.';
+var lyrics = 'Knowledge and wisdom is the key';
 ```
-  * If a string contains a single quote character, it should be escaped:
+
+  * Если в строке встречается одинарная кавычка, допускается запись с использованием двойных кавычек:
 
 ```javascript
-var test = 'It shouldn\'t fail';
+var lyrics = "Don't worry, be happy. Look at me, I'm happy";
 ```
 
-##Semicolons
-Statements should always end with a semicolon.
+##<a name="5"></a>Точка с запятой
+Точка с запятой ставится всегда.
 
-##Keywords
-  * Keywords are always followed by a single space character:
+##<a name="5a"></a>Запятая
+
+###<a name="5a-1"></a>Leading comma
+
+Leading comma не используется
+
+**Хорошо**
+
+```javascript
+superSummer(
+    veryVeryLongLongLongVariableName1,
+    veryVeryLongLongLongVariableName2,
+    veryVeryLongLongLongVariableName3
+);
+
+var story = [
+  once,
+  upon,
+  aTime,
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength',
+};
+
+
+```
+
+**Плохо**
+
+```javascript
+superSummer( veryVeryLongLongLongVariableName1
+           , veryVeryLongLongLongVariableName2
+           , veryVeryLongLongLongVariableName3
+           );
+
+var story = [
+    once
+  , upon
+  , aTime
+];
+
+var hero = {
+    firstName: 'Bob'
+  , lastName: 'Parr'
+  , heroName: 'Mr. Incredible'
+  , superPower: 'strength'
+};
+```
+
+###<a name="5a-2"></a>Дополнительная запятая
+
+Дополнительная запятая на последней строке многострочных объявлений массивов и объектов обязательна.
+
+**Хорошо**
+```javascript
+var story = [
+  once,
+  upon,
+  aTime,
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength',
+};
+```
+
+**Плохо**
+```javascript
+var story = [
+  once,
+  upon,
+  aTime
+];
+
+var hero = {
+  firstName: 'Bob',
+  lastName: 'Parr',
+  heroName: 'Mr. Incredible',
+  superPower: 'strength'
+};
+```
+
+Для однострочных объявлений запятая после последнего элемента не нужна.
+
+**Хорошо**
+```javascript
+var story = [once, upon, aTime];
+
+var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible'};
+```
+
+**Плохо**
+```javascript
+var story = [once, upon, aTime,];
+
+var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible',};
+```
+
+##<a name="6"></a>Ключевые слова
+  * Ключевые слова отделяются пробелом:
 
 ```javascript
 if (test) {
-    // ...
+  // ...
 }
 
 function foo() {
-    // ...
+  // ...
 }
 
 var bar = function () {
-    // ...
+  // ...
 };
 ```
-  * If the keyword is followed by a semicolon, there should be no space between them:
+
+  * Перед точкой с запятой пробел не ставится:
 
 ```javascript
 return;
 ```
 
-##Block Statements
-  * The opening curly brace should be on the same line and separated with one space character:
+##<a name="7"></a>Блочные инструкции
+  * Открывающая фигурная скобка ставится на той же строке и отделяется пробелом от предыдущей конструкции:
 
 ```javascript
 if (test) {
-    // ...
+  // ...
 }
 
 function foo() {
-    // ...
+  // ...
 }
 ```
-  * Branching and looping statements should always be surrounded with curly braces:
+  * Фигурные скобки ставятся всегда:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 if (test) {
-    return;
+  return;
 }
 ```
-**Bad:**
+**Плохо:**
 
 ```javascript
 if (test)
-    return;
+  return;
 
 if (test) return;
 
 if (test) { return; }
 ```
 
-##Conditional Statements
-###if
-  * The `else` keyword should be on the same line as the closing brace of the if-part of the statement:
+##<a name="8"></a>Условные инструкции
+###<a name="8-1"></a>if
+  * `else` пишется на той же строке, что и закрывающая фигурная скобка
 
 ```javascript
-if (test) {
-    // ...
+if (time < 10) {
+  greeting = 'Good morning';
+} else if (time < 20) {
+  greeting = 'Good day';
 } else {
-    // ...
+  greeting = 'Good evening';
 }
 ```
-  * Condition statements should not contain assignment operations:
+  * Присваивание в условном выражении не используется:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 var foo = bar();
 if (foo > 0) {
-    // ...
+  // ...
 }
 ```
 
-**Bad:**
+**Плохо:**
 ```javascript
 var foo;
 if ((foo = bar()) > 0) {
-    // ...
+  // ...
 }
 ```
-  * Logical operators should not be used for conditional branching:
+  * Выражения используются только там, где требуется значение:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 if (condition) {
-    actionIfTrue();
+  actionIfTrue();
 } else {
-    actionIfFalse();
+  actionIfFalse();
 }
 ```
 
-**Bad:**
+**Плохо:**
 ```javascript
 condition && actionIfTrue() || actionIfFalse();
 ```
-  * Conditions longer than the [maximum line length](#general) should be divided as in the example:
+
+  * Длинные условия, которые не вмещаются на одну строку, разбиваются следующим образом:
 
 ```javascript
 if (longCondition ||
     anotherLongCondition &&
     yetAnotherLongCondition
 ) {
-    // ...
+  // ...
 }
 ```
 
- * [Yoda conditions](http://en.wikipedia.org/wiki/Yoda_conditions) should not be used:
+ * [Yoda conditions](http://en.wikipedia.org/wiki/Yoda_conditions) не используются:
 
-**Good:**
+**Хорошо:**
 ```javascript
 if (getType() === 'driving') {
-
+  // ...
 }
 ```
 
-**Bad:**
+**Плохо:**
 ```javascript
 if ('driving' === getType()) {
-
+  // ...
 }
 ```
 
-###switch
-The switch statement should be written as in the example:
+###<a name="8-2"></a>switch
 
 ```javascript
 switch (value) {
-    case 1:
-        // ...
-        break;
+  case 1:
+    // ...
+    break;
 
-    case 2:
-        // ...
-        break;
+  case 2:
+    // ...
+    break;
 
-    default:
-        // ...
-        // no break keyword on the last case
+  default:
+    // ...
+    // no break keyword on the last case
 }
 ```
 
-##Loops
-###for
-If possible, [Array.prototype.forEach](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) should be used instead of a `for` loop.
+##<a name="9"></a>Циклы
+###<a name="9-1"></a>for
+По возможности вместо `for` используется [Array.prototype.forEach](https://developer.mozilla.org/ru/docs/JavaScript/Reference/Global_Objects/Array/forEach):
 
 ```javascript
 [1, 2, 3].forEach(function (value) {
-    console.log(value);
+  console.log(value);
 });
 ```
-Performance-critical parts of the code can use a `for` statement.
 
-###for (var i in obj)
-If possible, [Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) should be used instead of a `for-in` construction.
+Код с использованием `forEach` проще читать (легче абстрагироваться от того, что происходит в каждой итерации). Где
+критична скорость используется обычный `for`.
+
+###<a name="9-2"></a>for (var i in obj)
+Допускается только для итераций по ключам в [object/map/hash](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml?showone=for-in_loop#for-in_loop)
+```javascript
+function printArray(arr) {
+  for (var key in arr) {
+    print(arr[key]);
+  }
+}
+
+printArray([0,1,2,3]);  // This works.
+
+var a = new Array(10);
+printArray(a);  // This is wrong.
+
+a = document.getElementsByTagName('*');
+printArray(a);  // This is wrong.
+
+a = [0,1,2,3];
+a.buhu = 'wine';
+printArray(a);  // This is wrong again.
+
+a = new Array;
+a[3] = 3;
+printArray(a);  // This is wrong again.
+```
+
+Иначе, вместо `for-in` используется [Object.keys](https://developer.mozilla.org/ru/docs/JavaScript/Reference/Global_Objects/Object/keys):
 ```javascript
 Object.keys(obj).forEach(function (key) {
-    console.log(key);
+  console.log(key);
 });
 ```
 
-##Operators
-###'with' operator
+##<a name="10"></a>Операторы
+###<a name="10-1"></a>with
 
-The `with` operator should not be used.
+Оператор `with` не используется.
 
-###Comparison Operators
-If there is no need for type casting, the strict equality operator `===` (or strict inequality `!==`) should be used.
+###<a name="10-2"></a>Оператор равенства
+Всегда используется строгое равенство `===` (неравенство `!==`), если нет необходимости в приведении типов.
 
-###Ternary Operator
-The ternary operator should be written as in the examples:
+###<a name="10-3"></a>Тернарный оператор
 
 ```javascript
 var x = a ? b : c;
@@ -357,59 +514,64 @@ var z = a ?
     moreComplicatedC;
 ```
 
-###Unary Operators
-Unary operators should be typed without whitespace between them and their operands:
+###<a name="10-4"></a>Унарный оператор
+Все унарные операторы пишутся слитно с операндами:
+
 ```javascript
 var foo = !bar;
 ```
-Exceptions from this rule are the unary [special JS operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Special_operators)).
 
-##eval
-The `eval` function should be avoided.
-`json` serialized data should be parsed with [JSON.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON/parse).
+##<a name="11"></a>eval
+Избегаем использования `eval`. Для парсинга `json` используется [JSON.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON/parse).
 
-##undefined
-Checking for `undefined` values should be done using the strict equality operator.
+##<a name="12"></a>undefined
 
-**Good:**
+Проверяем значение через typeof.
+
+**Хорошо:**
 ```javascript
+typeof x === 'undefined';
+```
+
+**Плохо:**
+```javascript
+// в современных браузерах уже определен immutable undefined.
+var undefined;
+
+// проверка через строгое соответствие
 x === undefined;
 ```
 
-**Bad:**
-```javascript
-typeof x === 'undefined'
+##<a name="13"></a>Круглые скобки
+  * Ставятся, если только это необходимо синтаксисом или семантикой.
+  * Не используются с унарными операторами `delete`, `typeof` и `void`, а также ключевыми
+словами `return`, `throw`, `new`.
 
-x === void 0
-```
+##<a name="14"></a>Исключения
 
-##Parentheses
-  * Should be used only if it is required of the expression's syntax or semantics.
-  * Should not be used with the unary operators `delete`, `typeof` and `void`, or with the keywords `return`, `throw` and `new`.
+Создаём исключения с помощью `new Error`:
 
-##Exceptions
-`throw` should be used with `new Error` or an object of a class derived from `Error`:
-
-**Good:**
+**Хорошо:**
 ```javascript
 throw new Error('msg');
 ```
-**Bad:**
+**Плохо:**
 ```javascript
 throw 'msg';
 ```
 
-##Type Casting
-Type casting should be done explicitly:
+##<a name="15"></a>Приведение типов
 
-**Good:**
+Используются явные приведения типов:
+
+**Хорошо:**
 ```javascript
 Boolean(foo)
 Number(bar)
 String(baz)
-[].indexOf(qux) === -1 or [].indexOf(qux) < 0
+[].indexOf(qux) === -1 или [].indexOf(qux) < 0
 ```
-**Bad:**
+**Плохо:**
 ```javascript
 !!foo
 +bar
@@ -417,17 +579,67 @@ baz + ''
 ~[].indexOf(qux)
 ```
 
-##Multi-Line Statements
-  * If a statement is longer than the maximum [line length](#general), it is split into several lines and properly indented.
-  * Lines of the statement should be split after an operator:
+##<a name="16"></a>Переносы строк
+  * Максимальная длина строки `80` символов, если строка выходит длиннее, то по возможности делаются переносы строки, с соответствующими отступами после переноса.
+  * Операторы размещаются на предыдущей строке.
+
+**Хорошо**
 
 ```javascript
-var debt = this.calculateBaseDebt() + this.calculateSharedDebt() + this.calculateDebtPayments() +
-    this.calculateDebtFine();
-```
-  * Closing parentheses should be on a new line with the indentation of the current block statement:
+someWonderfulHtml = '<wonderfulblock>' +
+                    getEvenMoreHtml(someReallyInterestingValues, moreValues,
+                                    evenMoreParams, 'a duck', true, 72,
+                                    slightlyMoreMonkeys(3.14)
+                    ) + '</wonderfulblock>';
 
-**Good:**
+thisIsAVeryLongVariableName =
+    hereIsAnEvenLongerOtherFunctionNameThatWillNotFitOnPrevLine();
+
+thisIsAVeryLongVariableName = siblingOne + siblingTwo + siblingThree +
+    siblingFour + siblingFive + siblingSix + siblingSeven +
+    moreSiblingExpressions + allAtTheSameIndentationLevel;
+
+thisIsAVeryLongVariableName = operandOne + operandTwo + operandThree +
+    operandFour + operandFive * (
+        aNestedChildExpression + shouldBeIndentedMore
+    );
+
+someValue = this.foo(
+    shortArg,
+    'Some really long string arg - this is a pretty common case, actually.',
+    shorty2,
+    this.bar()
+);
+
+var bShortCondition =
+    searchableCollection(allYourStuff).contains(theStuffYouWant);
+if (bShortCondition &&
+    !ambientNotification.isActive() &&
+    (client.isAmbientSupported() || client.alwaysTryAmbientAnyways())
+) {
+  ambientNotification.activate();
+}
+```
+
+**Плохо**
+
+```javascript
+thisIsAVeryLongVariableName = hereIsAnEvenLongerOtherFunctionNameThatWillNotFitOnPrevLine();
+
+thisIsAVeryLongVariableName = siblingOne + siblingTwo + siblingThree +
+  siblingFour + siblingFive + siblingSix + siblingSeven +
+  moreSiblingExpressions + allAtTheSameIndentationLevel;
+
+if (searchableCollection(allYourStuff).contains(theStuffYouWant) &&
+    !ambientNotification.isActive() && (client.isAmbientSupported() ||
+                                        client.alwaysTryAmbientAnyways())) {
+  ambientNotification.activate();
+}
+```
+
+  * Закрывающие скобки не прижимаются к переносимому коду:
+
+**Хорошо:**
 ```javascript
 DoSomethingThatRequiresALongFunctionName(
     veryLongArgument1,
@@ -437,7 +649,7 @@ DoSomethingThatRequiresALongFunctionName(
 );
 anotherStatement;
 ```
-**Bad:**
+**Плохо:**
 ```javascript
 DoSomethingThatRequiresALongFunctionName(
     veryLongArgument1,
@@ -447,40 +659,40 @@ DoSomethingThatRequiresALongFunctionName(
 anotherStatement;
 ```
 
-##Method Chaining
-When a method is called on a new line, it should:
-  * Be one indentation level deeper than the target object.
-  * Begin with the property access operator `.`.
+##<a name="17"></a>Цепочки вызовов
+* При переносе вызова функции на новую строку:
+  * Оператор доступа к свойству `.` ставится на новой строке.
+  * Добавляется отступ относительно объекта, у которого вызывается функция.
 
-**Good**:
+**Хорошо**:
 
 ```js
 someObject
-    .operation()
-    .operationWithCallback(function (obj) {
-        obj.processed = true;
-    })
-   .end();
+  .operation()
+  .operationWithCallback(function (obj) {
+    obj.processed = true;
+  })
+  .end();
 ```
 
-**Bad**:
+**Плохо**:
 
 ```js
 someObject.
-   start().
-   end();
+  start().
+  end();
 
 someObject
 .start()
 .end();
 ```
 
-##String concatenation
-  * Strings should be concatenated with the `+` operator.
-  * The `[].join('')` should be avoided.
-  * Escaping newline literals inside strings should be avoided.
+##<a name="18"></a>Конкатенация строк
+  * Для конкатенации строк используется оператор `+`.
+  * Конструкция `[].join('')` не используется (это было актуально для старых браузеров).
+  * `\` не используется.
 
-**Good:**
+**Хорошо:**
 ```javascript
 var foo = 'A rather long string of English text, an error message ' +
     'actually that just keeps going and going -- an error ' +
@@ -488,19 +700,26 @@ var foo = 'A rather long string of English text, an error message ' +
     'those Schwarzenegger shades)! Where was I? Oh yes, ' +
     'you\'ve got an error and all the extraneous whitespace is ' +
     'just gravy.  Have a nice day.';
+
+var foo = 'A rather long string of English text, an error message ' +
+          'actually that just keeps going and going -- an error ' +
+          'message to make the Energizer bunny blush (right through ' +
+          'those Schwarzenegger shades)! Where was I? Oh yes, ' +
+          'you\'ve got an error and all the extraneous whitespace is ' +
+          'just gravy.  Have a nice day.';
 ```
-**Bad:**
+**Плохо:**
 ```javascript
 var foo = 'A rather long string of English text, an error message \
-          actually that just keeps going and going -- an error \
-          message to make the Energizer bunny blush (right through \
-          those Schwarzenegger shades)! Where was I? Oh yes, \
-          you\'ve got an error and all the extraneous whitespace is \
-          just gravy.  Have a nice day.';
+  actually that just keeps going and going -- an error \
+  message to make the Energizer bunny blush (right through \
+  those Schwarzenegger shades)! Where was I? Oh yes, \
+  you\'ve got an error and all the extraneous whitespace is \
+  just gravy.  Have a nice day.';
 ```
 
-##Empty Lines
-A single empty line can be used as a separator for grouping the code into logical blocks:
+##<a name="19"></a>Пустые линии
+Могут использоваться для логической группировки частей кода:
 
 ```javascript
 doSomethingTo(x);
@@ -512,89 +731,109 @@ nowDoSomethingWith(y);
 andNowWith(z);
 ```
 
-##Function Context
-* Binding the context variable for function calls should be done using [Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind):
+##<a name="20"></a>Контекст функции
+
+* Рекомендуется использовать `Function.prototype.bind`:
 
 ```javascript
 doAsync(function () {
-    this.fn();
+  this.fn();
 }.bind(this));
 ```
 
-* Preferably, the context argument should be used (if available):
+* Если функция позволяет передать `this` параметром, используем его:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
 [1, 2, 3].forEach(function (n) {
-    this.fn(n);
+  this.fn(n);
 }, this);
 ```
 
-**Bad:**
+**Плохо:**
 
 ```javascript
 [1, 2, 3].forEach(function (n) {
-    this.fn(n);
+  this.fn(n);
 }.bind(this));
 ```
 
-* If assigning the current context to a variable, the variable should be named `_this`:
+* Если используется переменная, называем ее `_this`:
 
 ```javascript
 var _this = this;
 doAsync(function () {
-    _this.fn();
+  _this.fn();
 });
 ```
 
-##Comments
-  * In-line comments should start with `//`. Between the `//` and the text of the comment should be one space character.
-  * Comments for functions, classes, etc. should be written according to the [jsdoc](http://usejsdoc.org/) documentation syntax.
+##<a name="21"></a>Комментарии
+  * Для инлайновых комментариев используется `//`. После `//` ставится 1 пробел.
+  * Комментарии к функциям, классам и т.п. пишутся в формате [jsdoc](http://usejsdoc.org/). Наряду с многострочными комментариями, допускаются и однострочные.
+  * Для выделения функций в блоки необходим однострочный простой комментарий, чтобы при фолдинге всех функций, сам комментарий не сворачиваля. Комментарий должен быть простым, не в стиле jsdoc.
+```javascript
+var sGlobal = 'glob';
 
-##Classes
-  * "Symmetrical" methods should be declared one after the other. For example:
+/* Приватные функции */
+
+var _func1 = function () {
+  return;
+};
+
+/* Публичные функции */
+
+var func2 = function () {
+  return;
+};
+```
+
+##<a name="22"></a>Классы
+"Симметричные" методы размещаем рядом. Например:
 
 ```javascript
 var FooClass = inherit({
-    __constructor: function () {},
+  __constructor: function () {},
 
-    // destructors are placed right after the constructor
-    destruct: function () {},
+  // деструктор рядом с конструктором
+  destruct: function () {},
 
-    someMethod: function () {}
+  someMethod: function () {},
 });
 ```
 
-##node.js
+##<a name="23"></a>Импортирование модулей
 
-###Importing Modules
-  * Modules should be imported in the beginning of the file, after the description of the module (if present):
+* Все модули импортируются в начале файла сразу после описания к нему, если оно есть:
 
-**Good:**
+**Хорошо:**
 
 ```javascript
-var http = require('http');
-var fs = require('fs');
+jQuery.sap.registerModulePath("myPackages", "./package/");
+jQuery.sap.declare("tooSmartController");
+jQuery.sap.declare("anotherSmartController");
+jQuery.sap.require("DetailReport.controls.ExtendedChartContainer");
 
 // code here
 ```
-**Bad:**
+**Плохо:**
 
 ```javascript
-var http = require('http');
+jQuery.sap.require("DetailReport.controls.ExtendedChartContainer");
+jQuery.sap.registerModulePath("myPackages", "./package/");
 
 // code here
 
-var fs = require('fs');
+jQuery.sap.declare("tooSmartController");
+jQuery.sap.declare("anotherSmartController");
 
 // code here
 ```
 
-This rule does not apply to modules that are imported "on demand".
+Исключение: модули, импортируемые по требованию.
 
-  * Module import calls should be grouped according to the following order:
+* Импорты должны быть сгруппированы в следующем порядке:
 
-1. Standard node.js modules (i.e. fs, util, etc.).
-2. External lib modules.
-3. Modules of the current application.
+1. стандартные модули node.js
+2. модули сторонних библиотек
+3. модули вашего приложения
