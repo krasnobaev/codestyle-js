@@ -1,45 +1,6 @@
-JavaScript CodeStyle
-====================
-  - [Общие положения](#1)
-  - [Именование](#2)
-  - [Объявление переменных](#3)
-  - [Объявление констант](#3-1)
-  - [Литералы](#4)
-    - [Объекты](#4-1)
-    - [Массивы](#4-2)
-    - [Строки](#4-3)
-  - [Точка с запятой](#5)
-  - [Запятая](#5a)
-    - [Leading comma](#5a-1)
-    - [Дополнительная запятая](#5a-2)
-  - [Ключевые слова](#6)
-  - [Блочные инструкции](#7)
-  - [Условные инструкции](#8)
-    - [if](#8-1)
-    - [switch](#8-2)
-  - [Циклы](#9)
-    - [for](#9-1)
-    - [for (var i in obj)](#9-2)
-  - [Операторы](#10)
-    - [with](#10-1)
-    - [Оператор равенства](#10-2)
-    - [Тернарный оператор](#10-3)
-    - [Унарный оператор](#10-4)
-  - [eval](#11)
-  - [undefined](#12)
-  - [Круглые скобки](#13)
-  - [Исключения](#14)
-  - [Приведение типов](#15)
-  - [Переносы строк](#16)
-  - [Цепочки вызовов](#17)
-  - [Конкатенация строк](#18)
-  - [Пустые линии](#19)
-  - [Контекст функции](#20)
-  - [Комментарии](#21)
-  - [Классы](#22)
-  - [Импортирование модулей](#23)
+# JavaScript CodeStyle
 
-##<a name="1"></a>Общие положения
+## Общие положения
 
   * Кодировка UTF-8 без [BOM](http://en.wikipedia.org/wiki/Byte-order_mark).
   * Перевод строки: LF. В конце файла перевод строки **обязателен**.
@@ -51,7 +12,8 @@ JavaScript CodeStyle
   * 'use strict' обязателен.
   * Максимальное разделение блоков - 1 пустая строка. Если требуется выделить блок особым образом, необходим многострочный комментарий.
 
-##<a name="2"></a>Именование
+## Именование
+
   * `variableNamesLikeThis`
   * `functionNamesLikeThis`
   * `functionArgumentsLikeThis`
@@ -68,13 +30,15 @@ JavaScript CodeStyle
   * При именовании функций в качестве первого слова отдавать предпочтение глаголу
   * При именовании функций отдавать предпочтение словарю `is`, `set`, `get`, `to`, `on`, `has`, `fire`.
 
-##<a name="3"></a>Объявление переменных
+## Объявление переменных
+
   * Все переменные объявляются с `var`.
   * Каждая переменная в пределах одной области видимости объявляется только один раз.
   * Каждая переменная объявляется на новой строке. Это позволяет легко менять строки местами и подписывать к ним комментарии.
   * Переменные объявляются как можно ближе к месту использования.
 
 **Хорошо:**
+
 ```javascript
 var keys = ['foo', 'bar'];
 var values = [23, 42];
@@ -87,6 +51,7 @@ while (items.length) {
 ```
 
 **Плохо:**
+
 ```javascript
 var keys = ['foo', 'bar'],
     values = [23, 42],
@@ -99,24 +64,26 @@ while (items.length) {
 }
 ```
 
-##<a name="3-1"></a>Объявление констант
+## Объявление констант
 
 Константы именуются в верхнем регистре, с разделением через `_`
 
 **Хорошо:**
+
 ```javascript
 var MY_PRECIOUS = ' { ';
 ```
 
 **Плохо:**
+
 ```javascript
 var MYPRECIOUS = ' { ';
 var MyPrecious = ' } ';
 ```
 
-##<a name="4"></a>Литералы
+## Литералы
 
-###<a name="4-1"></a>Объекты
+### Объекты
 
   * После открывающей фигурной скобки и перед закрывающей пробел не ставится:
 
@@ -143,6 +110,7 @@ var obj = {
   lengthyName: 2,
 };
 ```
+
 **Плохо:**
 
 ```javascript
@@ -152,6 +120,7 @@ var obj = {
   lengthyName: 2,
 };
 ```
+
   * Имена ключей заключаются в кавычки только по необходимости:
 
 **Хорошо:**
@@ -170,7 +139,7 @@ var obj = {
 };
 ```
 
-###<a name="4-2"></a>Массивы
+### Массивы
 
 При объявлении массива, пробел ставится лишь после запятой:
 
@@ -178,7 +147,8 @@ var obj = {
 var fellowship = ['foo', 'bar', 'baz'];
 ```
 
-###<a name="4-3"></a>Строки
+### Строки
+
   * Строки записываются преимущественно с использованием одинарных кавычек:
 
 ```javascript
@@ -191,12 +161,13 @@ var lyrics = 'Knowledge and wisdom is the key';
 var lyrics = "Don't worry, be happy. Look at me, I'm happy";
 ```
 
-##<a name="5"></a>Точка с запятой
+## Точка с запятой
+
 Точка с запятой ставится всегда.
 
-##<a name="5a"></a>Запятая
+## Запятая
 
-###<a name="5a-1"></a>Leading comma
+### Leading comma
 
 Leading comma не используется
 
@@ -247,11 +218,12 @@ var hero = {
 };
 ```
 
-###<a name="5a-2"></a>Дополнительная запятая
+### Дополнительная запятая
 
 Дополнительная запятая на последней строке многострочных объявлений массивов и объектов обязательна.
 
 **Хорошо**
+
 ```javascript
 var story = [
   once,
@@ -268,6 +240,7 @@ var hero = {
 ```
 
 **Плохо**
+
 ```javascript
 var story = [
   once,
@@ -286,6 +259,7 @@ var hero = {
 Для однострочных объявлений запятая после последнего элемента не нужна.
 
 **Хорошо**
+
 ```javascript
 var story = [once, upon, aTime];
 
@@ -293,13 +267,15 @@ var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible'};
 ```
 
 **Плохо**
+
 ```javascript
 var story = [once, upon, aTime,];
 
 var hero = {firstName: 'Bob', lastName: 'Parr', heroName: 'Mr. Incredible',};
 ```
 
-##<a name="6"></a>Ключевые слова
+## Ключевые слова
+
   * Ключевые слова отделяются пробелом:
 
 ```javascript
@@ -322,7 +298,8 @@ var bar = function () {
 return;
 ```
 
-##<a name="7"></a>Блочные инструкции
+## Блочные инструкции
+
   * Открывающая фигурная скобка ставится на той же строке и отделяется пробелом от предыдущей конструкции:
 
 ```javascript
@@ -334,6 +311,7 @@ function foo() {
   // ...
 }
 ```
+
   * Фигурные скобки ставятся всегда:
 
 **Хорошо:**
@@ -343,6 +321,7 @@ if (test) {
   return;
 }
 ```
+
 **Плохо:**
 
 ```javascript
@@ -354,8 +333,9 @@ if (test) return;
 if (test) { return; }
 ```
 
-##<a name="8"></a>Условные инструкции
-###<a name="8-1"></a>if
+## Условные инструкции
+### if
+
   * `else` пишется на той же строке, что и закрывающая фигурная скобка
 
 ```javascript
@@ -379,12 +359,14 @@ if (foo > 0) {
 ```
 
 **Плохо:**
+
 ```javascript
 var foo;
 if ((foo = bar()) > 0) {
   // ...
 }
 ```
+
   * Выражения используются только там, где требуется значение:
 
 **Хорошо:**
@@ -398,6 +380,7 @@ if (condition) {
 ```
 
 **Плохо:**
+
 ```javascript
 condition && actionIfTrue() || actionIfFalse();
 ```
@@ -416,6 +399,7 @@ if (longCondition ||
  * [Yoda conditions](http://en.wikipedia.org/wiki/Yoda_conditions) не используются:
 
 **Хорошо:**
+
 ```javascript
 if (getType() === 'driving') {
   // ...
@@ -423,13 +407,14 @@ if (getType() === 'driving') {
 ```
 
 **Плохо:**
+
 ```javascript
 if ('driving' === getType()) {
   // ...
 }
 ```
 
-###<a name="8-2"></a>switch
+### switch
 
 ```javascript
 switch (value) {
@@ -447,8 +432,10 @@ switch (value) {
 }
 ```
 
-##<a name="9"></a>Циклы
-###<a name="9-1"></a>for
+## Циклы
+
+### for
+
 По возможности вместо `for` используется [Array.prototype.forEach](https://developer.mozilla.org/ru/docs/JavaScript/Reference/Global_Objects/Array/forEach):
 
 ```javascript
@@ -460,8 +447,10 @@ switch (value) {
 Код с использованием `forEach` проще читать (легче абстрагироваться от того, что происходит в каждой итерации). Где
 критична скорость используется обычный `for`.
 
-###<a name="9-2"></a>for (var i in obj)
+### for (var i in obj)
+
 Допускается только для итераций по ключам в [object/map/hash](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml?showone=for-in_loop#for-in_loop)
+
 ```javascript
 function printArray(arr) {
   for (var key in arr) {
@@ -493,15 +482,16 @@ Object.keys(obj).forEach(function (key) {
 });
 ```
 
-##<a name="10"></a>Операторы
-###<a name="10-1"></a>with
+## Операторы
+### with
 
 Оператор `with` не используется.
 
-###<a name="10-2"></a>Оператор равенства
+### Оператор равенства
+
 Всегда используется строгое равенство `===` (неравенство `!==`), если нет необходимости в приведении типов.
 
-###<a name="10-3"></a>Тернарный оператор
+### Тернарный оператор
 
 ```javascript
 var x = a ? b : c;
@@ -514,26 +504,30 @@ var z = a ?
     moreComplicatedC;
 ```
 
-###<a name="10-4"></a>Унарный оператор
+### Унарный оператор
+
 Все унарные операторы пишутся слитно с операндами:
 
 ```javascript
 var foo = !bar;
 ```
 
-##<a name="11"></a>eval
+## eval
+
 Избегаем использования `eval`. Для парсинга `json` используется [JSON.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON/parse).
 
-##<a name="12"></a>undefined
+## undefined
 
 Проверяем значение через typeof.
 
 **Хорошо:**
+
 ```javascript
 typeof x === 'undefined';
 ```
 
 **Плохо:**
+
 ```javascript
 // в современных браузерах уже определен immutable undefined.
 var undefined;
@@ -542,36 +536,43 @@ var undefined;
 x === undefined;
 ```
 
-##<a name="13"></a>Круглые скобки
+## Круглые скобки
+
   * Ставятся, если только это необходимо синтаксисом или семантикой.
   * Не используются с унарными операторами `delete`, `typeof` и `void`, а также ключевыми
 словами `return`, `throw`, `new`.
 
-##<a name="14"></a>Исключения
+## Исключения
 
 Создаём исключения с помощью `new Error`:
 
 **Хорошо:**
+
 ```javascript
 throw new Error('msg');
 ```
+
 **Плохо:**
+
 ```javascript
 throw 'msg';
 ```
 
-##<a name="15"></a>Приведение типов
+## Приведение типов
 
 Используются явные приведения типов:
 
 **Хорошо:**
+
 ```javascript
 Boolean(foo)
 Number(bar)
 String(baz)
 [].indexOf(qux) === -1 или [].indexOf(qux) < 0
 ```
+
 **Плохо:**
+
 ```javascript
 !!foo
 +bar
@@ -579,7 +580,8 @@ baz + ''
 ~[].indexOf(qux)
 ```
 
-##<a name="16"></a>Переносы строк
+## Переносы строк
+
   * Максимальная длина строки `80` символов, если строка выходит длиннее, то по возможности делаются переносы строки, с соответствующими отступами после переноса.
   * Операторы размещаются на предыдущей строке.
 
@@ -640,6 +642,7 @@ if (searchableCollection(allYourStuff).contains(theStuffYouWant) &&
   * Закрывающие скобки не прижимаются к переносимому коду:
 
 **Хорошо:**
+
 ```javascript
 DoSomethingThatRequiresALongFunctionName(
     veryLongArgument1,
@@ -649,6 +652,7 @@ DoSomethingThatRequiresALongFunctionName(
 );
 anotherStatement;
 ```
+
 **Плохо:**
 ```javascript
 DoSomethingThatRequiresALongFunctionName(
@@ -659,7 +663,7 @@ DoSomethingThatRequiresALongFunctionName(
 anotherStatement;
 ```
 
-##<a name="17"></a>Цепочки вызовов
+## Цепочки вызовов
 * При переносе вызова функции на новую строку:
   * Оператор доступа к свойству `.` ставится на новой строке.
   * Добавляется отступ относительно объекта, у которого вызывается функция.
@@ -687,12 +691,14 @@ someObject
 .end();
 ```
 
-##<a name="18"></a>Конкатенация строк
+## Конкатенация строк
+
   * Для конкатенации строк используется оператор `+`.
   * Конструкция `[].join('')` не используется (это было актуально для старых браузеров).
   * `\` не используется.
 
 **Хорошо:**
+
 ```javascript
 var foo = 'A rather long string of English text, an error message ' +
     'actually that just keeps going and going -- an error ' +
@@ -708,7 +714,9 @@ var foo = 'A rather long string of English text, an error message ' +
           'you\'ve got an error and all the extraneous whitespace is ' +
           'just gravy.  Have a nice day.';
 ```
+
 **Плохо:**
+
 ```javascript
 var foo = 'A rather long string of English text, an error message \
   actually that just keeps going and going -- an error \
@@ -718,7 +726,8 @@ var foo = 'A rather long string of English text, an error message \
   just gravy.  Have a nice day.';
 ```
 
-##<a name="19"></a>Пустые линии
+## Пустые линии
+
 Могут использоваться для логической группировки частей кода:
 
 ```javascript
@@ -731,7 +740,7 @@ nowDoSomethingWith(y);
 andNowWith(z);
 ```
 
-##<a name="20"></a>Контекст функции
+## Контекст функции
 
 * Рекомендуется использовать `Function.prototype.bind`:
 
@@ -768,10 +777,12 @@ doAsync(function () {
 });
 ```
 
-##<a name="21"></a>Комментарии
+## Комментарии
+
   * Для инлайновых комментариев используется `//`. После `//` ставится 1 пробел.
   * Комментарии к функциям, классам и т.п. пишутся в формате [jsdoc](http://usejsdoc.org/). Наряду с многострочными комментариями, допускаются и однострочные.
   * Для выделения функций в блоки необходим однострочный простой комментарий, чтобы при фолдинге всех функций, сам комментарий не сворачиваля. Комментарий должен быть простым, не в стиле jsdoc.
+  *
 ```javascript
 var sGlobal = 'glob';
 
@@ -788,7 +799,8 @@ var func2 = function () {
 };
 ```
 
-##<a name="22"></a>Классы
+## Классы
+
 "Симметричные" методы размещаем рядом. Например:
 
 ```javascript
@@ -802,7 +814,7 @@ var FooClass = inherit({
 });
 ```
 
-##<a name="23"></a>Импортирование модулей
+## Импортирование модулей
 
 * Все модули импортируются в начале файла сразу после описания к нему, если оно есть:
 
@@ -816,6 +828,7 @@ jQuery.sap.require("DetailReport.controls.ExtendedChartContainer");
 
 // code here
 ```
+
 **Плохо:**
 
 ```javascript
